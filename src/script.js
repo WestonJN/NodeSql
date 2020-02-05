@@ -54,10 +54,34 @@ const addNewVisitor = (visitorname,visitorage,dateofvisit,timeofvisit,assistant,
     pool.query(sql, values, (err,res)=>{
       if (err) throw err;
       console.log("Number of records updates: " + res.rowCount);
+  
+    });
+  }
+
+  const viewVisitor = (visitorid) => {
+  
+    const sql='SELECT * FROM visitors WHERE visitorid = $1';
+    const values= [visitorid]
+    pool.query(sql,values, (err,res)=>{
+      if (err) throw err;
+      console.log("Number of records displayed: " + res.rowCount);
+    
+    });
+  }
+  const deleteAllVisitor = () => {
+  
+    const sql='DELETE FROM visitors';
+      
+    pool.query(sql, (err,res)=>{
+      if (err) throw err;
+      console.log("Number of records deleted: " + res.rowCount);
     pool.end();
     });
   }
+
 addNewVisitor();
 listVisitors();
 deleteVisitor();
 updateVisitor();
+viewVisitor();
+deleteAllVisitor();
