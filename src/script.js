@@ -80,9 +80,13 @@ const addNewVisitor = (visitorname,visitorage,dateofvisit,timeofvisit,assistant,
     });
   }
 
-addNewVisitor();
-listVisitors();
-deleteVisitor();
-updateVisitor();
-viewVisitor();
-deleteAllVisitor();
+// addNewVisitor();
+// listVisitors();
+// deleteVisitor();
+// updateVisitor();
+// viewVisitor();
+// deleteAllVisitor();
+
+module.exports ={ 
+  addNewVisitor
+}
