@@ -1,4 +1,4 @@
-// require("dotenv").config();
+require("dotenv").config();
 // const db=require('db')
 // db.connect({
 //   host:process.env.DB_HOST,
@@ -7,11 +7,9 @@
 // })
 const Pool = require("pg").Pool;
 const pool = new Pool({
-  user: "user",
-  host: "localhost",
-  database: "db",
-  password: "pass",
-  port: 5432
+  user: process.env.DB_USER,
+  database: process.env.DB_DATABASE,
+  password: process.env.DB_PASS,
 });
 
 const addNewVisitor = (visitorname,visitorage,dateofvisit,timeofvisit,assistant,comments) => {
@@ -86,13 +84,13 @@ const addNewVisitor = (visitorname,visitorage,dateofvisit,timeofvisit,assistant,
     });
   }
 
-// addNewVisitor();
-// listVisitors();
-// deleteVisitor();
-// updateVisitor();
-// viewVisitor();
-// deleteAllVisitor();
+addNewVisitor();
+listVisitors();
+deleteVisitor();
+updateVisitor();
+viewVisitor();
+deleteAllVisitor();
 
-module.exports ={ 
-  addNewVisitor
-}
+// module.exports ={ 
+//   addNewVisitor
+// }
