@@ -5,8 +5,8 @@ CREATE SEQUENCE visitors_visitorid_seq INCREMENT 1 MINVALUE 1 MAXVALUE 922337203
 
 CREATE TABLE "public"."visitors" (
     "visitorid" integer DEFAULT nextval('visitors_visitorid_seq') NOT NULL,
-    "visitorname" character varying(30),
-    "visitorage" integer,
+    "name" character varying(30),
+    "age" integer,
     "dateofvisit" date,
     "timeofvisit" time without time zone,
     "assistant" character varying(30),
