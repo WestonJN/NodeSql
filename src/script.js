@@ -13,13 +13,6 @@ const addNewVisitor = async(visitorname,visitorage,dateofvisit,timeofvisit,assis
     const sql='INSERT INTO visitors(visitorname,visitorage,dateofvisit,timeofvisit,assistant,comments) VALUES ($1, $2, $3, $4, $5, $6)';
     const values= 
       [visitorname,visitorage,dateofvisit,timeofvisit,assistant,comments];
-      
-    // client.query(sql, values, (err,res)=>{
-    //   if (err) throw err;
-    //   console.log("Number of records inserted: " + res.rowCount);
-
-    // });
-
 	try {
 		query = await client.query(sql,values)
 		console.log(query.rows)
@@ -54,11 +47,11 @@ const addNewVisitor = async(visitorname,visitorage,dateofvisit,timeofvisit,assis
       try {
         query = await client.query(sql,values)
         console.log(query.rows)
-        await client.end()
+        // await client.end()
         return query.rows
       } catch(e) {
         console.log(e);
-        await client.end()
+        // await client.end()
       }
   }
 
@@ -69,40 +62,52 @@ const addNewVisitor = async(visitorname,visitorage,dateofvisit,timeofvisit,assis
       [visitorid,visitorname,visitorage,dateofvisit,timeofvisit,assistant,comments];
     
       
-    client.query(sql, values, (err,res)=>{
-      if (err) throw err;
-      console.log("Number of records updates: " + res.rowCount);
-  
-    });
+      try {
+        query = await client.query(sql,values)
+        console.log(query.rows)
+        // await client.end()
+        return query.rows
+      } catch(e) {
+        console.log(e);
+        // await client.end()
+      }
   }
 
   const viewVisitor = async(visitorid) => {
   
     const sql='SELECT * FROM visitors WHERE visitorid = $1';
     const values= [visitorid]
-    client.query(sql,values, (err,res)=>{
-      if (err) throw err;
-      console.log("Number of records displayed: " + res.rowCount);
-    
-    });
+    try {
+      query = await client.query(sql,values)
+      console.log(query.rows)
+      // await client.end()
+      return query.rows
+    } catch(e) {
+      console.log(e);
+      // await client.end()
+    }
   }
   const deleteAllVisitor = async() => {
   
     const sql='DELETE FROM visitors';
       
-    client.query(sql, (err,res)=>{
-      if (err) throw err;
-      console.log("Number of records deleted: " + res.rowCount);
-    client.end();
-    });
+    try {
+      query = await client.query(sql)
+      console.log(query.rows)
+      await client.end()
+      return query.rows
+    } catch(e) {
+      console.log(e);
+      await client.end()
+    }
   }
 
 addNewVisitor();
 listVisitors();
 deleteVisitor();
-// updateVisitor();
-// viewVisitor();
-// deleteAllVisitor();
+updateVisitor();
+viewVisitor();
+deleteAllVisitor();
 
 module.exports ={ 
   addNewVisitor
