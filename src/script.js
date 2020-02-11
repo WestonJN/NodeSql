@@ -11,12 +11,12 @@ const client = new Client({
 client.connect()
 const addNewVisitor = async(name,age,date,time,assistant,comments) => {
   
-    const sql='INSERT INTO visitors(visitor_name,visitor_age,date_of_visit,time_of_visit,assistant,comments) VALUES ($1, $2, $3, $4, $5, $6)';
+    const sql='INSERT INTO visitors(visitor_name,visitor_age,date_of_visit,time_of_visit,assistant,comments) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
     const values= 
       [name,age,date,time,assistant,comments];
 	try {
 		let query = await client.query(sql,values)
-		console.log(query.rows)
+		console.log(query)
 		return query.rows
 	} catch(e) {
 		console.log(e);
@@ -85,11 +85,11 @@ const addNewVisitor = async(name,age,date,time,assistant,comments) => {
     try {
       query = await client.query(sql)
       console.log(query.rows)
-      await client.end()
+      // await client.end()
       return query.rows
     } catch(e) {
       console.log(e);
-      await client.end()
+      // await client.end()
     }
   }
 

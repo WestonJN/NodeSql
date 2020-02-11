@@ -7,7 +7,7 @@ CREATE TABLE "public"."visitors" (
     "visitor_id" integer DEFAULT nextval('visitors_visitor_id_seq') NOT NULL,
     "visitor_name" character varying(30),
     "visitor_age" integer,
-    "date_of_visit" date,
+    "date_of_visit" VARCHAR,
     "time_of_visit" time without time zone,
     "assistant" character varying(30),
     "comments" character varying(350),
