@@ -1,4 +1,3 @@
-"use strict"
 
 require("dotenv").config();
 
@@ -10,11 +9,11 @@ const client = new Client({
 });
 
 client.connect()
-const addNewVisitor = async(visitorname,visitorage,dateofvisit,timeofvisit,assistant,comments) => {
+const addNewVisitor = async(name,age,date,time,assistant,comments) => {
   
-    const sql='INSERT INTO visitors(name,age,dateofvisit,timeofvisit,assistant,comments) VALUES ($1, $2, $3, $4, $5, $6)';
+    const sql='INSERT INTO visitors(visitor_name,visitor_age,date_of_visit,time_of_visit,assistant,comments) VALUES ($1, $2, $3, $4, $5, $6)';
     const values= 
-      [visitorname,visitorage,dateofvisit,timeofvisit,assistant,comments];
+      [name,age,date,time,assistant,comments];
 	try {
 		let query = await client.query(sql,values)
 		console.log(query.rows)
@@ -94,7 +93,7 @@ const addNewVisitor = async(visitorname,visitorage,dateofvisit,timeofvisit,assis
     }
   }
 
-addNewVisitor();
+// addNewVisitor();
 // listVisitors();
 // deleteVisitor();
 // updateVisitor();
