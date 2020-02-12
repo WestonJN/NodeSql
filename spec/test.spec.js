@@ -31,10 +31,20 @@ describe("SQL Database", ()=>{
 
     it("Should delete a single visitor", async(done)=>{
      
-        let remove= await deleteVisitor(20);
+        let remove= await deleteVisitor(17);
         // console.log(remove)
         expect(remove.command).toBe('DELETE');
         expect(remove.rowCount).toBe(1);
         done();
+    });
+
+    it("Should update a single visitor", async(done)=>{
+
+        let update= await updateVisitor(1,"John",12,"06/06/2012","14:21:12","Ash","thats good");
+
+        expect(update.command).toBe('UPDATE');
+        expect(update.rowCount).toBe(1);
+        done();
+
     });
 });

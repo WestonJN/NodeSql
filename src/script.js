@@ -50,11 +50,11 @@ const addNewVisitor = async(name,age,date,time,assistant,comments) => {
       }
   }
 
-  const updateVisitor = async(visitorid,visitorname,visitorage,dateofvisit,timeofvisit,assistant,comments) => {
+  const updateVisitor = async(id,name,age,date,time,assistant,comments) => {
   
-    const sql='UPDATE visitors SET name=$2,age=$3,dateofvisit=$4,timeofvisit=$5,assistant=$6,comments=$7 WHERE visitorid =$1';
+    const sql='UPDATE visitors SET name=$2,age=$3,date_of_visit=$4,time_of_visit=$5,assistant=$6,comments=$7 WHERE visitor_id =$1';
     const values= 
-      [visitorid,visitorname,visitorage,dateofvisit,timeofvisit,assistant,comments];
+      [id,name,age,date,time,assistant,comments];
     
       
       try {
@@ -66,10 +66,10 @@ const addNewVisitor = async(name,age,date,time,assistant,comments) => {
       }
   }
 
-  const viewVisitor = async(visitorid) => {
+  const viewVisitor = async(id) => {
   
-    const sql='SELECT * FROM visitors WHERE visitorid = $1';
-    const values= [visitorid]
+    const sql='SELECT * FROM visitors WHERE visitor_id = $1';
+    const values= [id]
     try {
       query = await client.query(sql,values)
       console.log(query.rows)
@@ -96,8 +96,8 @@ const addNewVisitor = async(name,age,date,time,assistant,comments) => {
 module.exports = { 
   addNewVisitor,
   listVisitors,
-  deleteVisitor
-  // updateVisitor,
+  deleteVisitor,
+  updateVisitor
   // viewVisitor,
   // deleteAllVisitor
 }
