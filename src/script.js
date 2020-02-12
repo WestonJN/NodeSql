@@ -16,7 +16,7 @@ const addNewVisitor = async(name,age,date,time,assistant,comments) => {
       [name,age,date,time,assistant,comments];
 	try {
 		let query = await client.query(sql,values)
-		console.log(query)
+		// console.log(query)
 		return query.rows
 	} catch(e) {
 		console.log(e);
@@ -25,26 +25,26 @@ const addNewVisitor = async(name,age,date,time,assistant,comments) => {
 
   const listVisitors = async() => {
   
-    const sql='SELECT * FROM visitors';
+    const sql='SELECT visitor_id, visitor_name FROM visitors';
     try {
       query = await client.query(sql)
-      console.log(query.rows)
+      // console.log(query.rows)
       return query.rows
     } catch(e) {
       console.log(e);
     }
   }
 
-  const deleteVisitor = async(visitorid) => {
+  const deleteVisitor = async(visitor_id) => {
   
-    const sql='DELETE FROM visitors WHERE visitorid=$1';
+    const sql='DELETE FROM visitors WHERE visitor_id=$1';
     const values= 
-      [visitorid];
+      [visitor_id];
       
       try {
         query = await client.query(sql,values)
-        console.log(query.rows)
-        return query.rows
+        console.log(query)
+        return query
       } catch(e) {
         console.log(e);
       }
@@ -85,21 +85,19 @@ const addNewVisitor = async(name,age,date,time,assistant,comments) => {
     try {
       query = await client.query(sql)
       console.log(query.rows)
-      // await client.end()
+      await client.end()
       return query.rows
     } catch(e) {
       console.log(e);
-      // await client.end()
+      await client.end()
     }
   }
-
-// addNewVisitor();
-// listVisitors();
-// deleteVisitor();
-// updateVisitor();
-// viewVisitor();
-// deleteAllVisitor();
-
+  
 module.exports = { 
-  addNewVisitor
+  addNewVisitor,
+  listVisitors,
+  deleteVisitor
+  // updateVisitor,
+  // viewVisitor,
+  // deleteAllVisitor
 }
