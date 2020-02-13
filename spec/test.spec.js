@@ -10,6 +10,9 @@ describe("SQL Database", ()=>{
     it("save data to  database", async  (done)=>{
 
        let NewVisitor = await addNewVisitor("Pule",30,"01/01/2020","15:30:00","Jobe", "mnandi");
+        await addNewVisitor("Pul",31,"02/01/2020","15:10:00","Joe", "mndi");
+        await addNewVisitor("Pu",32,"04/01/2020","15:20:00","Jbe", "mnandi");
+        await addNewVisitor("P",33,"06/01/2020","15:40:00","Job", "mnndi");
        
         expect(NewVisitor[0].visitor_name).toEqual("Pule");
         expect(NewVisitor[0].visitor_age).toEqual(30);
@@ -23,7 +26,7 @@ describe("SQL Database", ()=>{
     it("Should be able to list visitors",async (done)=>{
 
         let list= await listVisitors();
-        // console.log(list)
+        
         expect(list[0].visitor_name).toEqual("Pule");
         expect(list[0].visitor_id).toBeDefined();
         done();
@@ -32,7 +35,7 @@ describe("SQL Database", ()=>{
     it("Should delete a single visitor", async(done)=>{
      
         let remove= await deleteVisitor(30);
-        // console.log(remove)
+     
         expect(remove.command).toBe('DELETE');
         expect(remove.rowCount).toBe(1);
         done();
@@ -41,7 +44,7 @@ describe("SQL Database", ()=>{
     it("Should update a single visitor", async(done)=>{
 
         let update= await updateVisitor(45,"John",12,"06/06/2012","14:21:12","Ash","thats good");
-        // console.log(update)
+     
         expect(update.command).toBe('UPDATE');
         expect(update.rowCount).toBe(1);
         done();
@@ -51,7 +54,7 @@ describe("SQL Database", ()=>{
     it("Should display a visitor", async(done)=>{
 
         let view = await viewVisitor(21);
-        console.log(view);
+        
         expect(view[0].visitor_name).toEqual("Pule");
         expect(view[0].visitor_age).toEqual(30);
         expect(view[0].date_of_visit).toEqual("01/01/2020");
@@ -60,4 +63,10 @@ describe("SQL Database", ()=>{
         expect(view[0].comments).toEqual("mnandi");
         done();
     });
+
+    it ("Should delete all visitors", async (done)=>{
+        expect(await deleteAllVisitor()).not.toBeNull();
+        
+       done();
+    })
 });
