@@ -43,7 +43,7 @@ const addNewVisitor = async(name,age,date,time,assistant,comments) => {
       
       try {
         query = await client.query(sql,values)
-        console.log(query)
+        // console.log(query)
         return query
       } catch(e) {
         console.log(e);
@@ -52,27 +52,27 @@ const addNewVisitor = async(name,age,date,time,assistant,comments) => {
 
   const updateVisitor = async(id,name,age,date,time,assistant,comments) => {
   
-    const sql='UPDATE visitors SET name=$2,age=$3,date_of_visit=$4,time_of_visit=$5,assistant=$6,comments=$7 WHERE visitor_id =$1';
+    const sql='UPDATE visitors SET visitor_name=$2,visitor_age=$3,date_of_visit=$4,time_of_visit=$5,assistant=$6,comments=$7 WHERE visitor_id =$1';
     const values= 
       [id,name,age,date,time,assistant,comments];
     
       
       try {
        let query = await client.query(sql,values)
-        console.log(query.rows)
-        return query.rows
+        // console.log(query.rows)
+        return query
       } catch(e) {
         console.log(e);
       }
   }
 
-  const viewVisitor = async(id) => {
+  const viewVisitor = async(visitor_id) => {
   
     const sql='SELECT * FROM visitors WHERE visitor_id = $1';
-    const values= [id]
+    const values= [visitor_id]
     try {
       query = await client.query(sql,values)
-      console.log(query.rows)
+      // console.log(query.rows)
       return query.rows
     } catch(e) {
       console.log(e);
@@ -97,7 +97,7 @@ module.exports = {
   addNewVisitor,
   listVisitors,
   deleteVisitor,
-  updateVisitor
-  // viewVisitor,
+  updateVisitor,
+  viewVisitor
   // deleteAllVisitor
 }

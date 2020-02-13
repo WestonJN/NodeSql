@@ -31,7 +31,7 @@ describe("SQL Database", ()=>{
 
     it("Should delete a single visitor", async(done)=>{
      
-        let remove= await deleteVisitor(17);
+        let remove= await deleteVisitor(30);
         // console.log(remove)
         expect(remove.command).toBe('DELETE');
         expect(remove.rowCount).toBe(1);
@@ -40,11 +40,24 @@ describe("SQL Database", ()=>{
 
     it("Should update a single visitor", async(done)=>{
 
-        let update= await updateVisitor(1,"John",12,"06/06/2012","14:21:12","Ash","thats good");
-
+        let update= await updateVisitor(45,"John",12,"06/06/2012","14:21:12","Ash","thats good");
+        // console.log(update)
         expect(update.command).toBe('UPDATE');
         expect(update.rowCount).toBe(1);
         done();
 
+    });
+
+    it("Should display a visitor", async(done)=>{
+
+        let view = await viewVisitor(21);
+        console.log(view);
+        expect(view[0].visitor_name).toEqual("Pule");
+        expect(view[0].visitor_age).toEqual(30);
+        expect(view[0].date_of_visit).toEqual("01/01/2020");
+        expect(view[0].time_of_visit).toEqual("15:30:00");
+        expect(view[0].assistant).toEqual("Jobe");
+        expect(view[0].comments).toEqual("mnandi");
+        done();
     });
 });
