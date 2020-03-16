@@ -9,6 +9,27 @@ const client = new Client({
 });
 
 client.connect()
+const createTable = async function () {
+  try {
+      const sql = await client.query(
+          `CREATE TABLE IF NOT EXISTS 
+         Visitors(
+          visitor_id SERIAL PRIMARY KEY,
+          visitor_name VARCHAR(30),
+          visitor_age INTEGER,
+          date_Of_visit DATE,
+          time_Of_visit TIME,
+          assistant VARCHAR(30),
+          comments VARCHAR(350)
+      );`
+      );
+    
+  } catch (e) {
+      console.log(e);
+  }
+}
+
+createTable();
 const addNewVisitor = async(name,age,date,time,assistant,comments) => {
   
     const sql='INSERT INTO visitors(visitor_name,visitor_age,date_of_visit,time_of_visit,assistant,comments) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
@@ -89,6 +110,7 @@ const addNewVisitor = async(name,age,date,time,assistant,comments) => {
   }
   
 module.exports = { 
+  createTable,
   addNewVisitor,
   listVisitors,
   deleteVisitor,
